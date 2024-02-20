@@ -1,22 +1,23 @@
-// Replace your-framework with the name of your framework
-import type { Meta, StoryObj } from "@storybook/react";
-import { Navbar } from "./Navbar";
-import { RouterDecorator } from "shared/config/storybook/RouterDecorator/RouterDecorator";
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-const meta: Meta<typeof Navbar> = {
+import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
+import { Theme } from "app/providers/ThemeProvider";
+import { Navbar } from "./Navbar";
+
+export default {
   title: "widget/Navbar",
   component: Navbar,
-};
+  argTypes: {
+    backgroundColor: { control: "color" },
+  },
+} as ComponentMeta<typeof Navbar>;
 
-export const Light: Story = {
-  args: {},
-  decorators: [RouterDecorator],
-};
+const Template: ComponentStory<typeof Navbar> = (args) => <Navbar {...args} />;
 
-export const Dark: Story = {
-  args: {},
-  decorators: [RouterDecorator],
-};
+export const Light = Template.bind({});
+Light.args = {};
 
-export default meta;
-type Story = StoryObj<typeof Navbar>;
+export const Dark = Template.bind({});
+Dark.args = {};
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
