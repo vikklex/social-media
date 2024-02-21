@@ -1,53 +1,64 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  root: true,
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: "module",
-    ecmaFeatures: {
-      jsx: true,
+    env: {
+        browser: true,
+        es2021: true,
+        jest: true,
     },
-  },
-  settings: {
-    react: {
-      version: "detect",
-    },
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
-  },
-  plugins: ["@typescript-eslint", "import", "plugins", "i18next"],
-  extends: [
-    "plugin:react/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "plugin:storybook/recommended",
-    "plugin:storybook/recommended"
-  ],
-
-  rules: {
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-unused-vars": "warning",
-    "@typescript-eslint/no-empty-function": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/ban-types": "off",
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/display-name": "off",
-    "no-unused-vars": "off",
-    "no-case-declarations": "off",
-    "i18next/no-literal-string": ["error", { markupOnly: true }],
-    "import/order": [
-      "error",
-      {
-        groups: ["builtin", "external", "internal", "parent", "sibling"],
-        "newlines-between": "always",
-      },
+    extends: [
+        'plugin:react/recommended',
+        'airbnb',
+        'plugin:i18next/recommended',
     ],
-  },
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true,
+        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+    },
+    plugins: [
+        'react',
+        '@typescript-eslint',
+        'i18next',
+    ],
+    rules: {
+        'react/jsx-indent': [2, 4],
+        'react/jsx-indent-props': [2, 4],
+        indent: [2, 4],
+        'react/jsx-filename-extension': [
+            2,
+            { extensions: ['.js', '.jsx', '.tsx'] },
+        ],
+        'import/no-unresolved': 'off',
+        'import/prefer-default-export': 'off',
+        'no-unused-vars': 'warn',
+        'react/require-default-props': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-props-no-spreading': 'warn',
+        'react/function-component-definition': 'off',
+        'no-shadow': 'off',
+        'import/extensions': 'off',
+        'import/no-extraneous-dependencies': 'off',
+        'no-underscore-dangle': 'off',
+        'i18next/no-literal-string': [
+            'error',
+            {
+                markupOnly: true,
+                ignoreAttribute: ['data-testid', 'to'],
+            },
+        ],
+        'max-len': ['error', { ignoreComments: true, code: 100 }],
+    },
+    globals: {
+        __IS_DEV__: true,
+    },
+    overrides: [
+        {
+            files: ['**/src/**/*.test.{ts,tsx}'],
+            rules: {
+                'i18next/no-literal-string': 'off',
+            },
+        },
+    ],
 };

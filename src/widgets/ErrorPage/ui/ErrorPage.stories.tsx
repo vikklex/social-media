@@ -1,23 +1,23 @@
-// Replace your-framework with the name of your framework
-import type { Meta, StoryObj } from "@storybook/react";
-import { ErrorPage } from "./ErrorPage";
-import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "app/providers/ThemeProvider";
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-const meta: Meta<typeof ErrorPage> = {
-  title: "widget/ErrorPage",
-  component: ErrorPage,
-};
+import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/ThemeProvider';
+import { ErrorPage } from './ErrorPage';
 
-export const Light: Story = {
-  args: {},
-  decorators: [ThemeDecorator(Theme.DARK)],
-};
+export default {
+    title: 'widget/ErrorPage',
+    component: ErrorPage,
+    argTypes: {
+        backgroundColor: { control: 'color' },
+    },
+} as ComponentMeta<typeof ErrorPage>;
 
-export const Dark: Story = {
-  args: {},
-  decorators: [ThemeDecorator(Theme.LIGHT)],
-};
+const Template: ComponentStory<typeof ErrorPage> = (args) => <ErrorPage {...args} />;
 
-export default meta;
-type Story = StoryObj<typeof ErrorPage>;
+export const Light = Template.bind({});
+Light.args = {};
+
+export const Dark = Template.bind({});
+Dark.args = {};
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

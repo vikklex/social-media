@@ -1,24 +1,22 @@
-// Replace your-framework with the name of your framework
-import type { Meta, StoryObj } from "@storybook/react";
+import React from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/ThemeProvider';
+import { NotFoundPage } from './NotFoundPage';
 
-import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "app/providers/ThemeProvider";
-import { NotFoundPage } from "./NotFoundPage";
+export default {
+    title: 'pages/NotFoundPage',
+    component: NotFoundPage,
+    argTypes: {
+        backgroundColor: { control: 'color' },
+    },
+} as ComponentMeta<typeof NotFoundPage>;
 
-const meta: Meta<typeof NotFoundPage> = {
-  component: NotFoundPage,
-  title: "pages/NotFoundPage",
-};
+const Template: ComponentStory<typeof NotFoundPage> = (args) => <NotFoundPage {...args} />;
 
-export const LightPage: Story = {
-  args: {},
-  decorators: [ThemeDecorator(Theme.LIGHT)],
-};
+export const Normal = Template.bind({});
+Normal.args = {};
 
-export const DarlPage: Story = {
-  args: {},
-  decorators: [ThemeDecorator(Theme.DARK)],
-};
-
-export default meta;
-type Story = StoryObj<typeof NotFoundPage>;
+export const Dark = Template.bind({});
+Dark.args = {};
+Dark.decorators = [ThemeDecorator(Theme.DARK)];

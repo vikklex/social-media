@@ -1,15 +1,12 @@
-type Mods = Record<string, boolean | string>; // обьект у которого ключ строка, значение ключ или строка
+type Mods = Record<string, boolean | string>
 
-export function classNames(
-  cls: string,
-  mods: Mods = {},
-  additional: string[] = []
-): string {
-  return [
-    cls, // основной класс
-    ...additional.filter(Boolean), // дополнительный
-    ...Object.entries(mods)
-      .filter(([_, value]) => value) // оставляем со значением тру
-      .map(([key, _]) => key), //оставляем только ключи*/
-  ].join(" "); // соединяем в строку
+export function classNames(cls: string, mods: Mods = {}, additional: string[] = []): string {
+    return [
+        cls,
+        ...additional.filter(Boolean),
+        ...Object.entries(mods)
+            .filter(([_, value]) => Boolean(value))
+            .map(([className]) => className),
+    ]
+        .join(' ');
 }
